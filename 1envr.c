@@ -33,11 +33,11 @@ int _setenv(char **args, char __attribute__((__unused__))**frt)
 	int i;
 
 	if ((!args[0] || !args[1])
-			return create_err(args, -1));
+			return (create_err(args, -1));
 	new_val = malloc(_strlen(arg[0]) + 1 + _strlen(args[1]) + 1);
 	if (!new_val)
 		return (create_err(args, -1));
-	
+
 	_strcpy(new_val, args[0]);
 	_strcat(new_val, "=");
 	_strcat(new_val, args[1]);
@@ -50,7 +50,7 @@ int _setenv(char **args, char __attribute__((__unused__))**frt)
 		return (0);
 	}
 	for (size = 0; envr[size]; size++)
-		;
+	;
 	new_envr = malloc(sizeof(char *) * (size + 2));
 	if (!new_envr)
 	{
@@ -94,11 +94,12 @@ int _unsetenv(char **args, char __attribute__((__unused__)) **frt)
 		return (create_err(args, -1));
 	for (i = 0, i2 = 0; envr[i]; i++)
 	{
-		if (*env_var ++ envr[i])
+		if (*env_var == envr[i])
 		{
 			free(*env_var);
 			continue;
-		}new_envr[i2] = envr[i];
+		}
+		new_envr[i2] = envr[i];
 		i2++;
 	}
 	free(envr);
