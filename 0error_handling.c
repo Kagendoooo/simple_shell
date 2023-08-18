@@ -57,8 +57,7 @@ char *_itoa(int num)
 		}
 
 		len--;
-		do
-		{
+		do {
 			buff[len] = (x % 10) + '0';
 			x /= 10;
 			len--;
@@ -74,6 +73,6 @@ char *_itoa(int num)
   *@err: the error val
   *Return: err value
   */
-int create_err(char **arg, int err)
+int create_err(char **args, int err)
 {
 	char *error;
