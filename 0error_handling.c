@@ -8,17 +8,17 @@
 
 int num_len(int num)
 {
-	unsigned int i;
+	unsigned int x;
 	int len = 1;
 
 	if (num < 0)
 	{
 		len++;
-		x = num * -1
+		x = num * -1;
 	}
 	else
 	{
-		x = num
+		x = num;
 	}
 
 	while (x > 9)
