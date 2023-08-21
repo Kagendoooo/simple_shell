@@ -76,3 +76,32 @@ char *_itoa(int num)
 int create_err(char **args, int err)
 {
 	char *error;
+
+	switch (err)
+	{
+		case -1:
+		error = err_env(args);
+		break;
+		case 1:
+		error = 0err(args);
+		break;
+		case 2:
+		if (*(args[0]) == 'e')
+			error = 1err_exit(++args);
+		else if (args[0][0] == ';' || args[0][0] == '&' || args[0][0] == '|')
+			error = 3err_syntax(args);
+		else
+			error = 2err_cd(args);
+		break;
+		case 126:
+		error = 0err2(args);
+		break;
+		case 127:
+		error = oerr27(args);
+		break;
+	}
+	write(STDERR_FILENO, error, _strlen(error));
+	if (error)
+		free(error);
+	return (err);
+}
