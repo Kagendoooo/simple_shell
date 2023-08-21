@@ -1,43 +1,43 @@
 #include "shell.h"
 /**
- * _strtok - Tokenizes a string.
- * @line: The string.
+ * _strtok - Tokenizes a string
+ * @line: The string to be tokenized
  * @deli: The deliiter character to tokenize the string by
- * Return: A pointer to an array containing the tokenized words.
- */
+ * Return: A pointer to an array containing the tokenized words
+*/
 char **_strtok(char *line, char *deli)
 {
 	char **ptr;
-	int index = 0, tokens, t, letters, l;
+	int idx = 0, tkns, t, lttrs, l;
 
-	tokens = count_tokens(line, deli);
-	if (tokens == 0)
+	tkns = count_tokens(line, deli);
+	if (tkns == 0)
 		return (NULL);
 
-	ptr = malloc(sizeof(char *) * (tokens + 2));
+	ptr = malloc(sizeof(char *) * (tkns + 2));
 	if (!ptr)
 		return (NULL);
 
-	for (t = 0; t < tokens; t++)
+	for (t = 0; t < tkns; t++)
 	{
-		while (line[index] == *deli)
-			index++;
+		while (line[idx] == *deli)
+			idx++;
 
-		letters = token_len(line + index, deli);
+		lttrs = token_len(line + idx, deli);
 
-		ptr[t] = malloc(sizeof(char) * (letters + 1));
+		ptr[t] = malloc(sizeof(char) * (lttrs + 1));
 		if (!ptr[t])
 		{
-			for (index -= 1; index >= 0; index--)
-				free(ptr[index]);
+			for (idx -= 1; idx >= 0; idx--)
+				free(ptr[idx]);
 			free(ptr);
 			return (NULL);
 		}
 
-		for (l = 0; l < letters; l++)
+		for (l = 0; l < lttrs; l++)
 		{
-			ptr[t][l] = line[index];
-			index++;
+			ptr[t][l] = line[idx];
+			idx++;
 		}
 
 		ptr[t][l] = '\0';
@@ -47,4 +47,3 @@ char **_strtok(char *line, char *deli)
 
 	return (ptr);
 }
-
