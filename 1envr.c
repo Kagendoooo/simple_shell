@@ -1,22 +1,25 @@
 #include "shell.h"
 
 /**
- *_getenv - get an environment variable fro the path
- *@var: variable
- *Return: NULL or index
+ *shellby_env - prints current environment
+ *@args: array of arguments
+ *@frt:double pointer to start of args
+ *Return: -1/0
  */
-
-char **_getenv(const char *var)
+int shellby_env(char **args, char __attribute__((__unused__)) **frt)
 {
-	int i, len;
+	int i;
+	char n = '\n';
 
-	len = _strlen(var);
+	if (!envr)
+		return (-1);
 	for (i = 0; envr[i]; i++)
 	{
-		if (_strncmp(var, envr[i], len) == 0)
-			return (&envr[i]);
+		write(STDOUT_FILENO, envr[i], _strlen(envr[i]));
+		write(STDOUT_FILENO, &n, 1);
 	}
-	return (NULL);
+	(void)args;
+	return (0);
 }
 
 /**
@@ -32,8 +35,8 @@ int _setenv(char **args, char __attribute__((__unused__))**frt)
 	size_t size;
 	int i;
 
-	if ((!args[0] || !args[1])
-			return (create_err(args, -1));
+	if ((!args[0] || !args[1]))
+		return (create_err(args, -1));
 	new_val = malloc(_strlen(arg[0]) + 1 + _strlen(args[1]) + 1);
 	if (!new_val)
 		return (create_err(args, -1));
@@ -50,7 +53,7 @@ int _setenv(char **args, char __attribute__((__unused__))**frt)
 		return (0);
 	}
 	for (size = 0; envr[size]; size++)
-	;
+		;
 	new_envr = malloc(sizeof(char *) * (size + 2));
 	if (!new_envr)
 	{
@@ -69,11 +72,11 @@ int _setenv(char **args, char __attribute__((__unused__))**frt)
 }
 
 /**
-  *_unsetenv - deletes environmental variable
-  *@args: arguments passed to shell
-  *@frt: double pointer to beginning of args
-  *Return: -1 or 0
-  */
+ *_unsetenv - deletes environmental variable
+ *@args: arguments passed to shell
+ *@frt: double pointer to beginning of args
+ *Return: -1 or 0
+ */
 
 int _unsetenv(char **args, char __attribute__((__unused__)) **frt)
 {
@@ -108,3 +111,4 @@ int _unsetenv(char **args, char __attribute__((__unused__)) **frt)
 
 	return (0);
 }
+
