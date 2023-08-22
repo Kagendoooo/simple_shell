@@ -26,4 +26,33 @@ list_t *get_path_dir(char *path);
 void free_list(list_t *head);
 list_t *add_node_end(list_t **head, char *dir);
 
+int (*_builtin(char *command))(char **args, char **frt);
+int _exit(char **args, char **frt);
+int shellby_cd(char **args, char __attribute__((__unused__)) **frt);
+int shellby_help(char **args, char __attribute__((__unused__)) **frt);
+
+int num_len(int num);
+char *_itoa(int num);
+int create_err(char **args, int err);
+
+char **_copyenv(void);
+void free_env(void);
+char **_getenv(const char *var);
+
+char *0err26(char **args);
+char *0err27(char **args);
+
+alias_t *add_alias_end(alias_t **head, char *name, char *value);
+void free_alias_list(alias_t *head);
+list_t *add_node_end(list_t **head, char *dir);
+void free_list(list_t *head);
+
+char *fill_path_dir(char *path);
+list_t *get_path_dir(char *path);
+
+void *_realloc(void *ptr, unsigned int prev_size, unsigned int new_size);
+void assign_lnptr(char **lnptr, size_t *n, char *buff, size_t b);
+ssize_t _getline(char **lnptr, size_t *n, FILE *strm);
+
+
 #endif
