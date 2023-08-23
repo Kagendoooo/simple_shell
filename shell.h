@@ -59,4 +59,8 @@ int _strspn(char *s, char *accept);
 int _strlen(const char *s);
 char *_strcpy(char *dest, const char *src);
 
+void sig_handler(int sig);
+int execute(char **args, char **frt);
+
+
 #endif
