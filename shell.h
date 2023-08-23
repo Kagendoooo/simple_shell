@@ -23,9 +23,6 @@ char **_getenv(const char *var);
 char *get_location(char *command);
 list_t *get_path_dir(char *path);
 
-void free_list(list_t *head);
-list_t *add_node_end(list_t **head, char *dir);
-
 int (*_builtin(char *command))(char **args, char **frt);
 int _exit(char **args, char **frt);
 int shellby_cd(char **args, char __attribute__((__unused__)) **frt);
@@ -54,5 +51,6 @@ void *_realloc(void *ptr, unsigned int prev_size, unsigned int new_size);
 void assign_lnptr(char **lnptr, size_t *n, char *buff, size_t b);
 ssize_t _getline(char **lnptr, size_t *n, FILE *strm);
 
+int token_len(char *str, char *deli);
 
 #endif
