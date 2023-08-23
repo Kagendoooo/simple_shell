@@ -15,16 +15,9 @@ typedef struct node {
 	char *dir;
 } node_t;
 
-char **_strtok(char *line, char *deli);
-char *get_location(char *command);
-int _setenv(char **args, char __attribute__((__unused__)) **frt);
-int _unsetenv(char **args, char __attribute__((__unused__)) **frt);
-char **_getenv(const char *var);
-char *get_location(char *command);
-list_t *get_path_dir(char *path);
 
 int (*_builtin(char *command))(char **args, char **frt);
-int _exit(char **args, char **frt);
+int shellby_exit(char **args, char **frt);
 int shellby_cd(char **args, char __attribute__((__unused__)) **frt);
 int shellby_help(char **args, char __attribute__((__unused__)) **frt);
 
@@ -55,7 +48,6 @@ int token_len(char *str, char *deli);
 int count_tokens(char *str, char *deli);
 char **_strtok(char *line, char *deli);
 
-
 char *_strchr(char *s, char c);
 int _strspn(char *s, char *accept);
 
@@ -64,6 +56,7 @@ char *_strcpy(char *dest, const char *src);
 
 void sig_handler(int sig);
 int execute(char **args, char **frt);
+int main(int argc, char *argv[]);
 
 char *_strcat(char *dest, const char *src);
 char *_strncat(char *dest, const char *src, size_t n);
@@ -71,6 +64,28 @@ char *_strncat(char *dest, const char *src, size_t n);
 int _strcmp(char *s1, char *s2);
 int _strncmp(const char *s1, const char *s2, size_t n);
 
+int shellby_alias(char **args, char __attribute__((__unused__)) **frt);
+void set_alias(char *var_name, char *value);
+void print_alias(alias_t *alias);
+
+char *get_args(char *line, int *_exe);
+int call_args(char **args, char **frt, int *_exe);
+int exe_args(char **args, char **frt, int *_exe);
+int format_args(int *_exe);
+int check_args(char **args);
+
+int shellby_env(char **args, char __attribute__((__unused__)) **frt);
+int _setenv(char **args, char __attribute__((__unused__)) **frt);
+int _unsetenv(char **args, char __attribute__((__unused__)) **frt);
+
+void free_args(char **args, char **frt);
+char *get_pid(void);
+char *get_env_value(char *beginning, int len);
+void replace_vars(char **args, int *_exe);
+
+void format_line(char **line, ssize_t read);
+ssize_t get_new_len(char *line);
+void logical_ops(char *line, ssize_t *new_len);
 
 
 #endif
