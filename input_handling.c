@@ -113,7 +113,7 @@ ssize_t _getline(char **lnptr, size_t *n, FILE *strm)
 
 	while (a != '\n')
 	{
-		b = read(STDIN_FILENO, &c, 1);
+		b = read(STDIN_FILENO, &a, 1);
 		if (b == -1 || (b == 0 && in == 0))
 		{
 			free(buff);
