@@ -1,4 +1,20 @@
 #include "shell.h"
+
+void sig_handler(int sig);
+
+/**
+ * sig_handler - Print a new prompt upon a signal
+ * @sig: The signal
+ */
+void sig_handler(int sig)
+{
+	char *new_prompt = "\n$ ";
+
+	(void)sig;
+	signal(SIGINT, sig_handler);
+	write(STDIN_FILENO, new_prompt, 3);
+}
+
 /**
  * main - Runs a simple UNIX command interpreter
  * @argc: The number of arguments supplied to the program
@@ -51,4 +67,4 @@ int main(int argc, char *argv[])
 			exit(*_exe);
 		}
 	}
-
+}
