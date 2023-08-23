@@ -9,7 +9,7 @@
 int (*_builtin(char *command))(char **args, char **frt)
 {
 	builtin_t funcs[] = {
-		{ "exit", _exit },
+		{ "exit",shellby_exit },
 		{ "env", shellby_env },
 		{ "setenv", _setenv },
 		{ "unsetenv", _unsetenv },
@@ -29,7 +29,7 @@ int (*_builtin(char *command))(char **args, char **frt)
 }
 
 /**
- *_exit - process termination
+ *shellby_exit - process termination
  *@args: array of arguments
  *Return: 2 or 0
  */
@@ -66,10 +66,11 @@ int _exit(char **args)
 	exit(num);
 }
 
+
 /**
  *shellby_cd - changes current directory
  *@args: array of arguments
- *frt: double pointer to args
+ *@frt: double pointer to args
  *Return: -2, -1 or 0
  */
 
@@ -149,4 +150,37 @@ int shellby_cd(char **args, char __attribute__((__unused__)) **frt)
 		free(dir_info);
 		return (0);
 	}
+}
+
+/**
+ * shellby_help - shows information about shellby builtin commands
+ * @args:  array of arguments
+ * @frt:  pointer to the beginning of args
+ * Return: 0/ -1
+ */
+
+int shellby_help(char **args, char __attribute__((__unused__)) **frt)
+{
+	if (!args[0])
+		man_all();
+	else if (_strcmp(args[0], "alias") == 0)
+		man_alias();
+	else if (_strcmp(args[0], "cd") == 0)
+		man_cd();
+	else if (_strcmp(args[0], "exit") == 0)
+		man_exit();
+	else if (_strcmp(args[0], "env") == 0)
+		man_env();
+	else if (_strcmp(args[0], "setenv") == 0)
+		help_setenv();
+	else if (_strcmp(args[0], "unsetenv") == 0)
+		man_unsetenv();
+	else if (_strcmp(args[0], "help") == 0)
+		man_help();
+	else
+		write(STDERR_FILENO, name, _strlen(name));
+
+
+	return (0);
+}
 
