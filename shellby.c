@@ -9,7 +9,7 @@
 int (*_builtin(char *command))(char **args, char **frt)
 {
 	builtin_t funcs[] = {
-		{ "exit",shellby_exit },
+		{ "exit", shellby_exit },
 		{ "env", shellby_env },
 		{ "setenv", _setenv },
 		{ "unsetenv", _unsetenv },
@@ -33,7 +33,7 @@ int (*_builtin(char *command))(char **args, char **frt)
  *@args: array of arguments
  *Return: 2 or 0
  */
-int _exit(char **args)
+int shellby_exit(char **args)
 {
 	int i = 0, len_of_int = 10;
 	unsigned int num = 0;
@@ -118,24 +118,16 @@ int shellby_cd(char **args, char __attribute__((__unused__)) **frt)
 			if (_getenv("HOME") != NULL)
 				chdir(*(_getenv("HOME")) + 5);
 		}
-
-
 		pwd = getcwd(pwd, 0);
 		if (!pwd)
 			return (-1);
-
-
 		dir_info = malloc(sizeof(char *) * 2);
 		if (!dir_info)
 			return (-1);
-
-
 		dir_info[0] = "OLDPWD";
 		dir_info[1] = oldpwd;
 		if (_setenv(dir_info, dir_info) == -1)
 			return (-1);
-
-
 		dir_info[0] = "PWD";
 		dir_info[1] = pwd;
 		if (_setenv(dir_info, dir_info) == -1)
