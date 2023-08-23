@@ -7,7 +7,7 @@ int token_len(char *str, char *deli);
  * @str: string to be searched
  * @deli: delimiter character
  * Return: delimiter index
-*/
+ */
 int token_len(char *str, char *deli)
 {
 	int idx = 0, length = 0;
@@ -21,12 +21,41 @@ int token_len(char *str, char *deli)
 	return (length);
 }
 
+int count_tokens(char *str, char *deli);
+
+/**
+ * count_tokens - Count the number of delimited words
+ * @str: string to be searched
+ * @deli: delimiter character
+ * Return: The number of words contained within str.
+ */
+int count_tokens(char *str, char *deli)
+{
+	int idx, tkns = 0, length = 0;
+
+	for (idx = 0; *(str + idx); idx++)
+		length++;
+
+	for (idx = 0; idx < length; idx++)
+	{
+		if (*(str + idx) != *deli)
+		{
+			tkns++;
+			idx += token_len(str + idx, deli);
+		}
+	}
+
+	return (tkns);
+}
+
+char **_strtok(char *line, char *deli);
+
 /**
  * _strtok - Tokenize a string
  * @line: string to be tokenized
  * @deli: delimiter character to tokenize
  * Return: pointer
-*/
+ */
 char **_strtok(char *line, char *deli)
 {
 	char **ptr;
