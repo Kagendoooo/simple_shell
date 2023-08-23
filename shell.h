@@ -52,6 +52,9 @@ void assign_lnptr(char **lnptr, size_t *n, char *buff, size_t b);
 ssize_t _getline(char **lnptr, size_t *n, FILE *strm);
 
 int token_len(char *str, char *deli);
+int count_tokens(char *str, char *deli);
+char **_strtok(char *line, char *deli);
+
 
 char *_strchr(char *s, char c);
 int _strspn(char *s, char *accept);
