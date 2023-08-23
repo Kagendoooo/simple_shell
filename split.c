@@ -1,9 +1,31 @@
 #include "shell.h"
+
+int token_len(char *str, char *deli);
+
 /**
- * _strtok - Tokenizes a string
- * @line: The string to be tokenized
- * @deli: The deliiter character to tokenize the string by
- * Return: A pointer to an array containing the tokenized words
+ * token_len - Locates the delimiter index
+ * @str: string to be searched
+ * @deli: delimiter character
+ * Return: delimiter index
+*/
+int token_len(char *str, char *deli)
+{
+	int idx = 0, length = 0;
+
+	while (*(str + idx) && *(str + idx) != *deli)
+	{
+		length++;
+		idx++;
+	}
+
+	return (length);
+}
+
+/**
+ * _strtok - Tokenize a string
+ * @line: string to be tokenized
+ * @deli: delimiter character to tokenize
+ * Return: pointer
 */
 char **_strtok(char *line, char *deli)
 {
