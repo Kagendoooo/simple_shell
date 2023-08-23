@@ -62,5 +62,8 @@ char *_strcpy(char *dest, const char *src);
 void sig_handler(int sig);
 int execute(char **args, char **frt);
 
+char *_strcat(char *dest, const char *src);
+char *_strncat(char *dest, const char *src, size_t n);
+
 
 #endif
