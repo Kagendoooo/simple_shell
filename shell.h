@@ -53,4 +53,10 @@ ssize_t _getline(char **lnptr, size_t *n, FILE *strm);
 
 int token_len(char *str, char *deli);
 
+char *_strchr(char *s, char c);
+int _strspn(char *s, char *accept);
+
+int _strlen(const char *s);
+char *_strcpy(char *dest, const char *src);
+
 #endif
