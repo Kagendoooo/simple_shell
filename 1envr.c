@@ -11,11 +11,11 @@ int shellby_env(char **args, char __attribute__((__unused__)) **frt)
 	int i;
 	char n = '\n';
 
-	if (!envr)
+	if (!environ)
 		return (-1);
-	for (i = 0; envr[i]; i++)
+	for (i = 0; environ[i]; i++)
 	{
-		write(STDOUT_FILENO, envr[i], _strlen(envr[i]));
+		write(STDOUT_FILENO, envr[i], _strlen(environ[i]));
 		write(STDOUT_FILENO, &n, 1);
 	}
 	(void)args;
@@ -52,7 +52,7 @@ int _setenv(char **args, char __attribute__((__unused__))**frt)
 		*env_var = new_val;
 		return (0);
 	}
-	for (size = 0; envr[size]; size++)
+	for (size = 0; environ[size]; size++)
 		;
 	new_envr = malloc(sizeof(char *) * (size + 2));
 	if (!new_envr)
@@ -61,12 +61,12 @@ int _setenv(char **args, char __attribute__((__unused__))**frt)
 		return (create_err(args, -1));
 	}
 
-	for (i = 0; envr[i]; i++)
-		new_envr[i] = envr[i];
-	free(envr);
-	envr = new_envr;
-	envr[i] = new_val;
-	envr[i + 1] = NULL;
+	for (i = 0; environ[i]; i++)
+		new_envr[i] = environ[i];
+	free(environ);
+	environ = new_envr;
+	environ[i] = new_val;
+	environ[i + 1] = NULL;
 
 	return (0);
 }
@@ -90,24 +90,24 @@ int _unsetenv(char **args, char __attribute__((__unused__)) **frt)
 	if (!env_var)
 		return (0);
 
-	for (size = 0; envr[size]; size++)
+	for (size = 0; environ[size]; size++)
 		;
 	new_envr = malloc(sizeof(char *) * size);
 	if (!new_envr)
 		return (create_err(args, -1));
-	for (i = 0, i2 = 0; envr[i]; i++)
+	for (i = 0, i2 = 0; environ[i]; i++)
 	{
-		if (*env_var == envr[i])
+		if (*env_var == environ[i])
 		{
 			free(*env_var);
 			continue;
 		}
-		new_envr[i2] = envr[i];
+		new_envr[i2] = environ[i];
 		i2++;
 	}
-	free(envr);
-	envr = new_envr;
-	envr[size - 1] = NULL;
+	free(environ);
+	environ = new_envr;
+	environ[size - 1] = NULL;
 
 	return (0);
 }
