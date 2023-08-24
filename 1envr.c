@@ -15,7 +15,7 @@ int shellby_env(char **args, char __attribute__((__unused__)) **frt)
 		return (-1);
 	for (i = 0; environ[i]; i++)
 	{
-		write(STDOUT_FILENO, envr[i], _strlen(environ[i]));
+		write(STDOUT_FILENO, environ[i], _strlen(environ[i]));
 		write(STDOUT_FILENO, &n, 1);
 	}
 	(void)args;
