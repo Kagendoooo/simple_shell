@@ -31,13 +31,13 @@ int shellby_env(char **args, char __attribute__((__unused__)) **frt)
 
 int _setenv(char **args, char __attribute__((__unused__))**frt)
 {
-	char **env_var = NULL, **new_envr, *new_value;
+	char **env_var = NULL, **new_envr, *new_val;
 	size_t size;
 	int i;
 
 	if ((!args[0] || !args[1]))
 		return (create_err(args, -1));
-	new_val = malloc(_strlen(arg[0]) + 1 + _strlen(args[1]) + 1);
+	new_val = malloc(_strlen(args[0]) + 1 + _strlen(args[1]) + 1);
 	if (!new_val)
 		return (create_err(args, -1));
 
