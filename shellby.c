@@ -33,10 +33,10 @@ int (*_builtin(char *command))(char **args, char **frt)
  *@args: array of arguments
  *Return: 2 or 0
  */
-int shellby_exit(char **args)
+int shellby_exit(char **args, char **frt)
 {
 	int i = 0, len_of_int = 10;
-	unsigned int num = 0;
+	unsigned int num = 0, max = 1 << (sizeof(int) * 8 - 1);
 
 	if (args[1])
 	{
@@ -118,6 +118,7 @@ int shellby_cd(char **args, char __attribute__((__unused__)) **frt)
 			if (_getenv("HOME") != NULL)
 				chdir(*(_getenv("HOME")) + 5);
 		}
+	}
 		pwd = getcwd(pwd, 0);
 		if (!pwd)
 			return (-1);
@@ -141,7 +142,6 @@ int shellby_cd(char **args, char __attribute__((__unused__)) **frt)
 		free(pwd);
 		free(dir_info);
 		return (0);
-	}
 }
 
 /**
@@ -164,7 +164,7 @@ int shellby_help(char **args, char __attribute__((__unused__)) **frt)
 	else if (_strcmp(args[0], "env") == 0)
 		man_env();
 	else if (_strcmp(args[0], "setenv") == 0)
-		help_setenv();
+		man_setenv();
 	else if (_strcmp(args[0], "unsetenv") == 0)
 		man_unsetenv();
 	else if (_strcmp(args[0], "help") == 0)
