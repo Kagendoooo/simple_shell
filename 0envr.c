@@ -25,7 +25,7 @@ char **_copyenv(void)
 			free(new_envr);
 			return (NULL);
 		}
-		_strcpy(new_envr[i], envr[i]);
+		_strcpy(new_envr[i], environ[i]);
 	}
 	new_envr[i] = NULL;
 	return (new_envr);
