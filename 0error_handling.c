@@ -83,21 +83,21 @@ int create_err(char **args, int err)
 		error = err_env(args);
 		break;
 		case 1:
-		error = 0err(args);
+		error = err0(args);
 		break;
 		case 2:
 		if (*(args[0]) == 'e')
-			error = 1err_exit(++args);
+			error = err1_exit(++args);
 		else if (args[0][0] == ';' || args[0][0] == '&' || args[0][0] == '|')
-			error = 3err_syntax(args);
+			error = err3_syntax(args);
 		else
-			error = 2err_cd(args);
+			error = err2_cd(args);
 		break;
 		case 126:
-		error = 0err2(args);
+		error = err026(args);
 		break;
 		case 127:
-		error = oerr27(args);
+		error = err027(args);
 		break;
 	}
 	write(STDERR_FILENO, error, _strlen(error));
