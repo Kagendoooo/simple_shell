@@ -14,7 +14,7 @@
 #define END_OF_FILE -2
 #define EXIT -3
 
-extern char **envr;
+extern char **environ;
 char *name;
 int his;
 
