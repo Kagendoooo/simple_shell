@@ -136,7 +136,7 @@ void replace_vars(char **line, int *_exe)
 				free(rplcmnt);
 				rplcmnt = NULL;
 			}
-			_strcat(new_line, &old_line[k]);
+			_strcat(new_line, &old_line[z]);
 			free(old_line);
 			*line = new_line;
 			old_line = new_line;
