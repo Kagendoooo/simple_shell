@@ -69,6 +69,7 @@ void free_list(list_t *head);
 
 char *fill_path_dir(char *path);
 list_t *get_path_dir(char *path);
+char *get_location(char *command);
 
 void *_realloc(void *ptr, unsigned int prev_size, unsigned int new_size);
 void assign_lnptr(char **lnptr, size_t *n, char *buff, size_t b);
