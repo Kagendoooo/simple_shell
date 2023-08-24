@@ -120,7 +120,7 @@ void logical_ops(char *line, ssize_t *new_len);
 int shellby_alias(char **args, char __attribute__((__unused__)) **frt);
 void set_alias(char *var_name, char *value);
 void print_alias(alias_t *alias);
-
+char **rpc_aliases(char **args);
 
 void man_all(void);
 void man_alias(void);
