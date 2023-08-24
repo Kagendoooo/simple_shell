@@ -105,7 +105,7 @@ int  cmd_file(char *file_path, int *_exe)
 		if (_strncmp(args[x], ";", 1) == 0)
 		{
 			free(args[x]);
-			args[i] = NULL;
+			args[x] = NULL;
 			ret = call_args(args, frt, _exe);
 			args = &args[++x];
 			x = 0;
