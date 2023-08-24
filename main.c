@@ -54,7 +54,7 @@ int execute(char **args, char **frt)
 		}
 		if (child_pid == 0)
 		{
-			execve(command, args, envr);
+			execve(command, args, environ);
 			if (errno == EACCES)
 				ret = (create_err(args, 126));
 			free_env();
@@ -92,8 +92,8 @@ int main(int argc, char *argv[])
 	signal(SIGINT, sig_handler);
 
 	*_exe = 0;
-	envr = _copyenv();
-	if (!envr)
+	environ = _copyenv();
+	if (!environ)
 		exit(-100);
 
 	if (argc != 1)
