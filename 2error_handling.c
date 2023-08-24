@@ -11,7 +11,7 @@ char *err026(char **args)
 	char *error, *his_str;
 	int len;
 
-	hist_str = _itoa(his);
+	his_str = _itoa(his);
 	if (!his_str)
 		return (NULL);
 
