@@ -15,6 +15,65 @@ void sig_handler(int sig)
 	write(STDIN_FILENO, new_prompt, 3);
 }
 
+int execute(char **args, char **frt);
+
+/**
+ * execute - Executes command in child process
+ * @args: arguments
+ * @frt: A double pointer
+ * Return: Value of last command or error code
+*/
+int execute(char **args, char **frt)
+{
+	pid_t child_pid;
+	int sts, fg = 0, ret = 0;
+	char *command = args[0];
+
+	if (command[0] != '/' && command[0] != '.')
+	{
+		fg = 1;
+		command = get_location(command);
+	}
+
+	if (!command || (access(command, F_OK) == -1))
+	{
+		if (errno == EACCES)
+			ret = (create_err(args, 126));
+		else
+			ret = (create_err(args, 127));
+	}
+	else
+	{
+		child_pid = fork();
+		if (child_pid == -1)
+		{
+			if (fg)
+				free(command);
+			perror("Error child:");
+			return (1);
+		}
+		if (child_pid == 0)
+		{
+			execve(command, args, envr);
+			if (errno == EACCES)
+				ret = (create_err(args, 126));
+			free_env();
+			free_args(args, frt);
+			free_alias_list(aliases);
+			_exit(ret);
+		}
+		else
+		{
+			wait(&sts);
+			ret = WEXITSTATUS(sts);
+		}
+	}
+	if (fg)
+		free(command);
+	return (ret);
+}
+
+
 /**
  * main - Runs a simple UNIX command interpreter
  * @argc: The number of arguments supplied to the program
