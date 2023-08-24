@@ -12,7 +12,7 @@ char **_copyenv(void)
 
 	for (s = 0; envr[s]; s++)
 		;
-	new_envr = malloc(sieof(char *) * (s + 1));
+	new_envr = malloc(sizeof(char *) * (s + 1));
 	if (!new_envr)
 		return (NULL);
 	for (i = 0; envr[i]; i++)
