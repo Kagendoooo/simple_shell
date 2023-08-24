@@ -1,13 +1,43 @@
 #ifndef _SHELL_H_
 #define _SHELL_H_
 
+#include <fcntl.h>
+#include <signal.h>
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <sys/wait.h>
-#include <stdio.h>
-#include <string.h>
 #include <stdlib.h>
 #include <unistd.h>
+#include <errno.h>
+#include <stdio.h>
+
+#define END_OF_FILE -2
+#define EXIT -3
+
+extern char **envr;
+char *name;
+int his;
+
+typedef struct list_s
+{
+	char *dir;
+	struct list_s *next;
+} list_t;
+
+typedef struct builtin_s
+{
+	char *name;
+	int (*f)(char **argv, char **frt);
+} builtin_t;
+
+typedef struct alias_s
+{
+	char *name;
+	char *value;
+	struct alias_s *next;
+} alias_t;
+
+alias_t *aliases;
 
 
 typedef struct node {
@@ -29,8 +59,8 @@ char **_copyenv(void);
 void free_env(void);
 char **_getenv(const char *var);
 
-char *0err26(char **args);
-char *0err27(char **args);
+char *err026(char **args);
+char *err027(char **args);
 
 alias_t *add_alias_end(alias_t **head, char *name, char *value);
 void free_alias_list(alias_t *head);
@@ -87,5 +117,28 @@ void format_line(char **line, ssize_t read);
 ssize_t get_new_len(char *line);
 void logical_ops(char *line, ssize_t *new_len);
 
+int shellby_alias(char **args, char __attribute__((__unused__)) **frt);
+void set_alias(char *var_name, char *value);
+void print_alias(alias_t *alias);
+
+
+void man_all(void);
+void man_alias(void);
+void man_cd(void);
+void man_exit(void);
+void man_help(void);
+
+void man_env(void);
+void man_setenv(void);
+void man_unsetenv(void);
+
+int cant_open(char *file_path);
+int  cmd_file(char *file_path, int *_exe);
+
+char *err_env(char **args);
+char *err0(char **args);
+char *err1_exit(char **args);
+char *err2_cd(char **args);
+char *err3_syntax(char **args);
 
 #endif
