@@ -50,8 +50,8 @@ char *_itoa(int num)
 	{
 		x = num * -1;
 		buff[0] = '-';
-
-		else
+	}
+	else
 		{
 			x = num;
 		}
@@ -62,9 +62,8 @@ char *_itoa(int num)
 			x /= 10;
 			len--;
 		}
-		while (x > 0)
+		while (x > 0);
 			return (buff);
-	}
 }
 
 /**
