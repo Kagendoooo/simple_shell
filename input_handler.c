@@ -1,4 +1,4 @@
-#include "shell.c"
+#include "shell.h"
 
 char *get_args(char *line, int *_exe);
 
@@ -24,7 +24,7 @@ char *get_args(char *line, int *_exe)
 	{
 		his++;
 		if (isatty(STDIN_FILENO))
-			write(STDOUT_FILENO, prompt, 2);
+			write(STDOUT_FILENO, pr, 2);
 		return (get_args(line, _exe));
 	}
 
