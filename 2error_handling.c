@@ -1,12 +1,12 @@
 #include "shell.h"
 
 /**
-  *0err26 - creates an error message for denied permission failure
+  *err026 - creates an error message for denied permission failure
   *@args: an array of arguments
   *Return: error string
   */
 
-char * 0err26(char **args)
+char *err026(char **args)
 {
 	char *error, *his_str;
 	int len;
@@ -34,12 +34,12 @@ char * 0err26(char **args)
 }
 
 /**
-  *0err27 - error message for commands not found
+  *err027 - error message for commands not found
   *@args: arguments passed
   *Return: error string
   */
 
-char * 0err27(char **args)
+char *err027(char **args)
 {
 	char *error, *his_str;
 	int len;
